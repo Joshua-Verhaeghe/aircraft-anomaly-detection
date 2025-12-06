@@ -1,9 +1,16 @@
 import pandas as pd
+import os
+from .config import get_filepath
 
-def load_data(file_path):
-    data = pd.read_csv(file_path)
 
-    return data
+def load_data(filename):
+    
+    file_path = get_filepath(filename, folder="raw")
+    df = pd.read_csv(file_path)
 
-def save_data(data, file_path):
-    data.to_csv(file_path, index=False)
+    return df
+
+def save_data(df, filename):
+
+    file_path = get_filepath(filename, folder="processed")
+    df.to_csv(file_path, index=False)

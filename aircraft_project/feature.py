@@ -21,8 +21,10 @@ def normalisation(df, params):
 
     scaler = MinMaxScaler()
     df_normalise = df.copy()
-    df_normalise = pd.DataFrame(scaler.fit_transform(df_normalise[params]))
+    #df_normalise = pd.DataFrame(scaler.fit_transform(df_normalise[params]), columns=params ) # perdait en tete colonnes
     
+    df_normalise[params] = scaler.fit_transform(df_normalise[params])
+
     return df_normalise
 
 def standard_deviation(df):
@@ -34,3 +36,4 @@ def standard_deviation(df):
         df_ecart_type = pd.concat([df_ecart_type, pd.DataFrame([[w] + ecart_type.tolist()], columns=df_ecart_type.columns)], ignore_index=True)
 
     return df_ecart_type
+
